@@ -1,5 +1,7 @@
 package com.task.restAPI;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,14 +17,20 @@ public class DeviceController implements DeviceContInterface {
 	@Autowired
 	private DeviceService deviceService;	
 	
-	
-	
 	@Override
 	@RequestMapping(value = "/device/{id}", method = {RequestMethod.GET})
 	public Device getDevice(@PathVariable("id") int id){
 		Device device = deviceService.getDevice(id);
 		return device;
 	} 
+	
+	@Override
+	@RequestMapping(value = "/device", method = {RequestMethod.GET})
+	public List<Device> getAllDevices(){
+		List<Device> deviceList = deviceService.getAllDevices();
+		return deviceList;
+	}
+	
 	
 	
 }

@@ -1,6 +1,8 @@
 package com.task.restAPI.dao;
 
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 
@@ -14,8 +16,6 @@ public class DeviceDaoImpl  implements DeviceDaoInterface{
 
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
-	
-	
 	
 	@Override
 	@Transactional(readOnly = true) 
@@ -31,6 +31,19 @@ public class DeviceDaoImpl  implements DeviceDaoInterface{
 		return device;	
 	}
 	
+	@Override
+	@Transactional(readOnly = true)
+	public List<Device> getAll() {
+		final String query = "SELECT * FROM device";
+		return jdbcTemplate.query(query, (rs, rowNum) ->
+			new Device(
+				rs.getInt("id"),
+				rs.getString("name"),
+				rs.getString("status"),
+				rs.getString("model")
+			));
+	
+	}
 	
 	
 	
