@@ -23,5 +23,9 @@ public class DeviceService {
 		return deviceDaoImpl.getAll();
 	}
 	
+	public Device addDevice(Device device) {
+		return deviceDaoImpl.saveDevice(device);
+	}
+	
 
 }

@@ -1,11 +1,16 @@
 package com.task.restAPI.dao;
 
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
-
+import org.springframework.jdbc.core.PreparedStatementCreator;
+import org.springframework.jdbc.support.GeneratedKeyHolder;
+import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -45,6 +50,26 @@ public class DeviceDaoImpl  implements DeviceDaoInterface{
 	
 	}
 	
+	
+	@Override
+	@Transactional
+    public Device saveDevice(final Device device) {
+		
+        final String query = "INSERT INTO device(name,status,model) VALUES(?,?,?)";
+        KeyHolder holder = new GeneratedKeyHolder();
+        jdbcTemplate.update(new PreparedStatementCreator() {
+			public PreparedStatement createPreparedStatement(Connection con) throws SQLException {
+				PreparedStatement ps = con.prepareStatement(query, new String[] {"id"});
+				ps.setString(1, device.getName());
+	        	ps.setString(2, device.getStatus());
+	        	ps.setString(3, device.getModel());
+	        	return ps;
+			}
+		}, holder);      
+        int generatedId = holder.getKey().intValue();
+        device.setId(generatedId);
+        return device; 
+    }
 	
 	
 }

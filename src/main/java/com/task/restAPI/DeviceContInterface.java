@@ -9,5 +9,6 @@ public interface DeviceContInterface {
 
 	Device getDevice(int id);
 	List<Device> getAllDevices();
-	
+	Device addDevice( Device device);
+
 }

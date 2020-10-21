@@ -9,5 +9,6 @@ public interface DeviceDaoInterface {
 	
 	Device getDevice(int deviceId);   
 	List<Device> getAll();
+	Device saveDevice(Device device);
 
 }
