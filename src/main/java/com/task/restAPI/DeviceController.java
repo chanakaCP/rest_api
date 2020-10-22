@@ -39,6 +39,28 @@ public class DeviceController implements DeviceContInterface {
 		return device;	
 	}
 	
+	@Override
+	@RequestMapping(value ="/device/{id}", method = {RequestMethod.PUT})
+	public void updateDevice(@PathVariable("id") int id, @RequestBody Device device){
+		if(deviceService.updateDevice(id, device) == 1) {
+			System.out.println("Successfully Updated");
+		} else {
+			System.out.println("Update failed");
+		}
+	}
+	
+	@Override
+	@RequestMapping(value ="/device/{id}", method = {RequestMethod.DELETE})
+	public void deleteDevice(@PathVariable("id") int id){
+		if(deviceService.deleteDevice(id) == 1) {
+			System.out.println("Successfully deleted");
+		} else {
+			System.out.println("Delete failed");
+		}
+//		return new ResponseEntity<String>("Device id deleted succeessfully", HttpStatus.OK);
+		
+	}
+	
 	
 	
 }

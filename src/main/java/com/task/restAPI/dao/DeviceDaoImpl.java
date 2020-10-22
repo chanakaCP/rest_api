@@ -72,4 +72,20 @@ public class DeviceDaoImpl  implements DeviceDaoInterface{
     }
 	
 	
+	@Override
+	@Transactional
+	public int updateDevice(int id, Device device) {
+		final String query = "UPDATE device SET name=?, status=?, model=? WHERE id=?";
+		return jdbcTemplate.update(query, device.getName(), device.getStatus(), device.getModel(), id);
+	}
+	
+	@Override
+	public int deleteDevice(int deviceId) {
+		String query = "DELETE FROM device WHERE id = ?";
+		int relust = jdbcTemplate.update(query,deviceId);
+		return relust;
+			
+	}
+	
+	
 }

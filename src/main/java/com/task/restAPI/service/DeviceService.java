@@ -27,5 +27,12 @@ public class DeviceService {
 		return deviceDaoImpl.saveDevice(device);
 	}
 	
+	public int updateDevice(int id, Device device) {
+		return deviceDaoImpl.updateDevice(id, device);
+	}
+	
+	public int deleteDevice(int id) {
+		return deviceDaoImpl.deleteDevice(id);
+	}
 
 }
